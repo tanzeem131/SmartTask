@@ -5,10 +5,7 @@ import {
   Clock,
   AlertCircle,
   Plus,
-  Edit2,
-  Trash2,
   Filter,
-  X,
 } from "lucide-react";
 import Navbar from "./Navbar";
 import Label from "./UI/Label";
@@ -70,6 +67,7 @@ export default function SmartTaskApp() {
     try {
       const res = await fetch(`${API_URL}/tasks`, {
         headers: { Authorization: `Bearer ${token}` },
+        credentials: "include",
       });
       const data = await res.json();
       setTasks(data.tasks || []);
@@ -86,6 +84,7 @@ export default function SmartTaskApp() {
       const res = await fetch(`${API_URL}${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
@@ -128,6 +127,7 @@ export default function SmartTaskApp() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        credentials: "include",
         body: JSON.stringify({
           title: formData.title,
           description: formData.description,
@@ -162,6 +162,7 @@ export default function SmartTaskApp() {
       await fetch(`${API_URL}/tasks/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
+        credentials: "include",
       });
       fetchTasks();
     } catch (err) {
