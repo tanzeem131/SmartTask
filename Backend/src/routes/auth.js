@@ -40,11 +40,6 @@ authRouter.post("/api/register", async (req, res) => {
       { expiresIn: "24h" }
     );
 
-    res.cookie("token", token, {
-      expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-      httpOnly: true,
-    });
-
     res.status(201).json({
       message: "User registered successfully.",
       token: token,
@@ -79,11 +74,6 @@ authRouter.post("/api/login", async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "24h" }
     );
-
-    res.cookie("token", token, {
-      expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-      httpOnly: true,
-    });
 
     const { _id, name } = user;
     res.json({
